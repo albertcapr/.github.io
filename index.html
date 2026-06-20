@@ -1734,7 +1734,7 @@ self.addEventListener('fetch', e => {
   }
   .series-header {
     display: grid;
-    grid-template-columns: 28px 52px 56px 72px 68px 30px;
+    grid-template-columns: 28px 52px 56px 1fr 1fr 32px;
     gap: 3px;
     padding: 0 0 8px;
     border-bottom: 1px solid var(--border);
@@ -1750,11 +1750,22 @@ self.addEventListener('fetch', e => {
   }
   .series-row {
     display: grid;
-    grid-template-columns: 28px 52px 56px 72px 68px 30px;
+    grid-template-columns: 28px 52px 56px 1fr 1fr 32px;
     gap: 3px;
     align-items: center;
     padding: 6px 0;
     border-bottom: 1px solid var(--border);
+  }
+  @media (max-width: 400px) {
+    .series-row {
+      grid-template-columns: 28px 48px 50px 1fr 1fr;
+      grid-template-rows: auto auto;
+    }
+    .series-row .btn-camara-serie {
+      grid-column: 5;
+      grid-row: 1;
+      justify-self: end;
+    }
   }
   .series-row:last-child { border-bottom: none; }
   .serie-num {
@@ -9485,7 +9496,7 @@ function renderMisPlantillas() {
               '<div class="serie-reps">' + e.reps + '</div>' +
               '<div class="serie-descanso">' + (e.descanso||'') + '</div>' +
               pesoInput +
-              '<button onclick="abrirAnalizadorTecnica(' + plan.id + ',\'' + d + '\',' + eIdx + ',' + sIdx + ',\'' + (e.nombre||'').replace(/'/g,'') + '\')" title="Analizar técnica con cámara" style="background:var(--green);border:none;border-radius:7px;color:white;font-size:14px;padding:6px 8px;cursor:pointer;flex-shrink:0;">📹</button>' +
+              '<button class="btn-camara-serie" onclick="abrirAnalizadorTecnica(' + plan.id + ',\'' + d + '\',' + eIdx + ',' + sIdx + ',\'' + (e.nombre||'').replace(/'/g,'') + '\')" title="Analizar técnica con cámara" style="background:var(--green);border:none;border-radius:7px;color:white;font-size:14px;padding:6px 8px;cursor:pointer;flex-shrink:0;min-width:32px;">📹</button>' +
             '</div>' +
             '<div id="rm_mp_' + plan.id + '_' + d + '_' + eIdx + '_' + sIdx + '" style="' + (rmVal > 0 ? '' : 'display:none;') + 'text-align:right;padding:2px 14px 5px;font-size:10px;font-weight:700;color:var(--green);">1RM ≈ ' + (rmVal > 0 ? rmVal : '') + ' kg</div>' +
             renderAnalisisSerie(s.analisis, sIdx + 1);
