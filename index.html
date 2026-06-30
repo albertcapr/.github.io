@@ -2222,20 +2222,18 @@ self.addEventListener('fetch', e => {
   }
   .series-row {
     display: grid;
-    grid-template-columns: 26px 52px 1fr 56px 64px 30px;
-    gap: 5px;
+    grid-template-columns: 24px 44px 1fr 56px 64px 26px;
+    gap: 4px;
     align-items: center;
-    padding: 8px 6px;
+    padding: 8px 4px;
     border-bottom: 1px solid var(--border);
   }
   @media (max-width: 400px) {
     .series-row {
-      grid-template-columns: 24px 44px 1fr 50px 58px 28px;
-      gap: 4px;
-      padding: 8px 4px;
+      grid-template-columns: 20px 38px 1fr 50px 58px 24px;
+      gap: 3px;
+      padding: 8px 3px;
     }
-    .serie-peso-wrap { padding: 6px 4px; max-width: 64px; }
-    .serie-peso { width: 30px; font-size: 16px; }
   }
   .series-row:last-child { border-bottom: none; }
   /* SET TYPE TAGS (warm-up, drop set, failure, normal) */
@@ -2374,21 +2372,23 @@ self.addEventListener('fetch', e => {
     gap: 3px;
     background: var(--bg);
     border: 2px solid var(--border);
-    border-radius: 12px;
-    padding: 6px 8px;
+    border-radius: 10px;
+    padding: 6px 6px;
     transition: border-color 0.15s;
-    min-width: 0;
+    min-width: 48px;
     max-width: 80px;
+    box-sizing: border-box;
   }
   .serie-peso-wrap:focus-within {
     border-color: var(--green);
     background: var(--green-light);
   }
   .serie-peso {
-    width: 38px;
+    width: 26px;
+    min-width: 26px;
     border: none;
     background: transparent;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 900;
     color: var(--text);
     font-family: inherit;
@@ -2400,12 +2400,17 @@ self.addEventListener('fetch', e => {
   }
   .serie-peso::-webkit-outer-spin-button,
   .serie-peso::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-  .serie-peso::placeholder { color: var(--text-hint); font-weight: 400; font-size: 16px; }
+  .serie-peso::placeholder { color: var(--text-hint); font-weight: 400; font-size: 15px; }
   .serie-peso-unit {
-    font-size: 12px;
+    font-size: 10px;
     color: var(--text-muted);
     font-weight: 700;
     flex-shrink: 0;
+  }
+  @media (max-width: 400px) {
+    .serie-peso-wrap { min-width: 42px; padding: 5px 4px; }
+    .serie-peso { width: 22px; min-width: 22px; font-size: 15px; }
+    .serie-peso-unit { font-size: 9px; }
   }
   .serie-completada .serie-num {
     background: #16A34A;
@@ -11442,7 +11447,7 @@ function renderMisPlantillas() {
               '<span style="font-size:10px;font-weight:700;color:#A855F7;text-align:center;">' + (isBWplan ? 'RPE' : 'KG') + '</span>' +
             '</div>';
           } else {
-            seriesHtml = '<div style="display:flex;gap:6px;padding:6px 12px 4px;border-bottom:1px solid var(--border);background:var(--bg);border-radius:8px 8px 0 0;"><span style="font-size:9px;font-weight:700;color:var(--text-hint);text-transform:uppercase;letter-spacing:.4px;width:22px;">#</span><span style="font-size:9px;font-weight:700;color:var(--text-hint);text-transform:uppercase;letter-spacing:.4px;flex-shrink:0;">Tipo</span><span style="font-size:9px;font-weight:700;color:var(--text-hint);text-transform:uppercase;letter-spacing:.4px;min-width:52px;">Anterior</span><span style="font-size:9px;font-weight:700;color:var(--text-hint);text-transform:uppercase;letter-spacing:.4px;flex:1;">' + (isBWplan ? 'Reps · RPE' : 'Reps · KG') + '</span><span style="font-size:9px;font-weight:700;color:var(--text-hint);width:32px;text-align:center;">✓</span></div>';
+            seriesHtml = '<div style="display:grid;grid-template-columns:24px 44px 1fr 56px 64px 26px;gap:4px;padding:6px 4px 4px;border-bottom:1px solid var(--border);background:var(--bg);border-radius:8px 8px 0 0;"><span style="font-size:9px;font-weight:700;color:var(--text-hint);text-transform:uppercase;letter-spacing:.4px;">#</span><span style="font-size:9px;font-weight:700;color:var(--text-hint);text-transform:uppercase;letter-spacing:.4px;">Tipo</span><span style="font-size:9px;font-weight:700;color:var(--text-hint);text-transform:uppercase;letter-spacing:.4px;">Anterior</span><span style="font-size:9px;font-weight:700;color:var(--text-hint);text-transform:uppercase;letter-spacing:.4px;text-align:center;">' + (isBWplan ? 'Reps' : 'Reps') + '</span><span style="font-size:9px;font-weight:700;color:var(--text-hint);text-transform:uppercase;letter-spacing:.4px;text-align:center;">' + (isBWplan ? 'RPE' : 'KG') + '</span><span style="font-size:9px;font-weight:700;color:var(--text-hint);text-align:center;">✓</span></div>';
           }
 
           seriesHtml += (e.seriesData || []).map(function(s, sIdx) {
